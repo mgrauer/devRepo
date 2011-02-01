@@ -1,0 +1,73 @@
+**Midas Functionality for Rodent Imaging**
+
+
+Data Provenance, all documents should be able to access their provenance within Midas--what should be stored, where should it be stored?
+
+  Creation datetime, modification datetime, events that caused creation (upload, result of an experiment), parent provenance.
+
+  What level should the provenance be at, at the bitstream or resource or item level?  and this should include the parent info, so we 
+  know where this document is stored in the hierarchy, so a child or sibling can be created.
+
+
+When a document is operated on in SSP, it should have provenance available so that any resulting child documents can be linked back
+
+  Perhaps an xml doc dumped per document, which has metadata including provenance about the doc, put into the SSP temp dir to be used.
+
+
+Experimental History in SSP.  We can think of a run of SSP as an experiment, and so we'd like an analogue of a lab notebook.  
+
+  It should record the inputs (input documents, metadata, and provenance, all should be linkable by the document), (command line arguments), (information on executables?
+  can get really elaborate with this, including version and build information), the steps in the computation (basically inputs, intermediates, computations, and outputs),
+  and outputs.
+
+  Some status display so that a user can see where the experiment is in the process.  This can be related to the DAG.  
+  
+  Possibility of stopping the execution at a certain point.
+
+  Find previous experiments and re-run them.
+
+  Find previous experiments and clone them, then change certain parameters.
+
+  Find previous experimental runs, and rerun them from a certain point.
+
+  Find previous experimental runs, and rerun them from a certain point, changing certain parameters.
+
+  List all experimental runs.
+    View DAG/process records, view outputs of these.
+
+  List all experimental runs for a given user.
+
+  List all experimental runs for a given document as input.
+
+  Jump from a document to the experimental run that created it.
+
+  Ability to share experiments, experimental design (inputs, parameters, executables), and outputs
+
+Options for storing outputs of an experimental run.  
+  
+  Currently there is the uploader.php script which can be executed by Condor Post the execution, uploading the
+  created file as a bitstream, added to an item with a passed down item id.  This has been supported (weakly) by the addition of a CondorPostScript BatchMake command
+  that is buggy.  Also, this script needs to be specified in the XML describing the SSP task.
+
+  Ideally we'd like to build in support to Midas that has flexibility in what options are available for saving outputs, but the display of these would be somewhat
+  rigid so as to not demand a lot of GUI development.  Most of this functionality should probably be built in at the level of provenance, and then used as a client by the
+  SSP system.
+    
+    Save all final outputs
+    
+    Save all intermediate outputs
+  
+    Save all intermediate outputs and final outputs, deleting intermediate outputs upon execution completion
+
+    Save outputs to a new item based on certain rules (new item, item as a child or sibling of certain hierarchy position)
+
+    Move bitstreams into parent location
+ 
+    Copy bitstreams into parent location (would this mean creating 2 versions of the same document?)
+
+  This output designation should come with a reasonable default (perhaps creating a new item, adding all outputs as bitstreams to the item, storing the 
+  provenance of this output with it (computation/experiment description, and inputs)
+
+
+  
+    
